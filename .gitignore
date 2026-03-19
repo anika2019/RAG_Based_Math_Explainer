@@ -1,0 +1,14 @@
+.env
+.env.*
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local vector store artifacts (build on demand)
+resources/math_vector_store/
+
+# Streamlit
+.streamlit/secrets.toml
