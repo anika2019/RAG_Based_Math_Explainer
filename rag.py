@@ -26,6 +26,7 @@ DEFAULT_USER_AGENT = (
     "Chrome/124.0.0.0 Safari/537.36"
     "Microsoft Edge/124.0.0.0"
 )
+os.environ.setdefault("USER_AGENT", DEFAULT_USER_AGENT)
 
 def initialize_math_rag():
     """Initializes the Embedding and LLM components."""
