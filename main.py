@@ -80,8 +80,8 @@ def main():
         st.subheader("Knowledge base")
         default_urls = "\n".join(
             [
-                "https://ncert.nic.in/textbook.php?mhh1=1-15",
-                "https://www.teachoo.com/subjects/cbse-maths/class-10th/chapter-4-quadratic-equations/solutions/",
+                "https://openstax.org/details/books/elementary-algebra-2e",
+                "https://www.ck12.org/book/ck-12-algebra-i-second-edition/section/10.0/",
             ]
         )
         urls_raw = st.text_area(
