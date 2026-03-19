@@ -23,6 +23,11 @@ EMBEDDING_MODEL = "models/gemini-embedding-001"
 # DeepSeek-R1 is the "Math King" for reasoning in 2026
 LLM_MODEL = "llama-3.3-70b-versatile" 
 VECTOR_STORE_PATH = Path(__file__).parent / "resources/math_vector_store"
+DEFAULT_USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/124.0.0.0 Safari/537.36"
+)
 
 GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
@@ -41,7 +46,11 @@ def initialize_math_rag():
 def build_knowledge_base(urls, embeddings):
     """Scrapes UP Board/NCERT data and saves it locally."""
     print("📚 Loading Math resources...")
-    loader = WebBaseLoader(web_paths=urls)
+    user_agent = os.getenv("USER_AGENT", DEFAULT_USER_AGENT)
+    loader = WebBaseLoader(
+        web_paths=urls,
+        requests_kwargs={"headers": {"User-Agent": user_agent}},
+    )
     docs = loader.load()
 
     # Math-Specific Splitter: Higher overlap to keep formulas together
