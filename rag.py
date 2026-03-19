@@ -108,7 +108,8 @@ def get_math_help(vector_store, llm, student_query):
 if __name__ == "__main__":
     # Suggested U.P. Board / NCERT Math Resources
     math_urls = [
-        "https://ncert.nic.in/textbook.php?mhh1=1-15", # NCERT Class 10 Math (Hindi)
+        "https://openstax.org/details/books/elementary-algebra-2e",
+        "https://www.google.com/search?q=https://www.ck12.org/book/ck-12-algebra-i-second-edition/section/10.0/",
     ]
         
 
