@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-import streamlit as st
 
 # LangChain Imports
 from langchain_community.document_loaders import WebBaseLoader
@@ -15,8 +14,6 @@ from langchain_core.runnables import RunnablePassthrough
 
 # 1. Configuration & Keys
 load_dotenv()
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 # 2026 Model Constants
 EMBEDDING_MODEL = "models/gemini-embedding-001"
@@ -30,17 +27,24 @@ DEFAULT_USER_AGENT = (
     "Microsoft Edge/124.0.0.0"
 )
 
-GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
-
 def initialize_math_rag():
     """Initializes the Embedding and LLM components."""
-    embeddings = GoogleGenerativeAIEmbeddings(model=EMBEDDING_MODEL, google_api_key=GOOGLE_API_KEY)
+    google_api_key = os.getenv("GOOGLE_API_KEY")
+    groq_api_key = os.getenv("GROQ_API_KEY")
+
+    if not google_api_key or not groq_api_key:
+        raise ValueError(
+            "Missing API keys. Set GOOGLE_API_KEY and GROQ_API_KEY via .env, "
+            "environment variables, or Streamlit secrets."
+        )
+
+    embeddings = GoogleGenerativeAIEmbeddings(model=EMBEDDING_MODEL, google_api_key=google_api_key)
     
     # We use a lower temperature (0.1) for Math to ensure accuracy over creativity
     llm = ChatGroq(
         model=LLM_MODEL, 
         temperature=0.1, 
-        api_key=GROQ_API_KEY
+        api_key=groq_api_key
     )
     return embeddings, llm
 
