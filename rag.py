@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import streamlit as st
 
 # LangChain Imports
 from langchain_community.document_loaders import WebBaseLoader
@@ -22,6 +23,8 @@ EMBEDDING_MODEL = "models/gemini-embedding-001"
 # DeepSeek-R1 is the "Math King" for reasoning in 2026
 LLM_MODEL = "llama-3.3-70b-versatile" 
 VECTOR_STORE_PATH = Path(__file__).parent / "resources/math_vector_store"
+
+GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 def initialize_math_rag():
     """Initializes the Embedding and LLM components."""

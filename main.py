@@ -18,6 +18,13 @@ load_dotenv()
 
 APP_TITLE = "RAG Based Math Solver (UP Board / NCERT)"
 
+def _hydrate_env_from_streamlit_secrets() -> None:
+    """Populate env vars from Streamlit secrets when running in cloud."""
+    if "GOOGLE_API_KEY" not in os.environ and "GOOGLE_API_KEY" in st.secrets:
+        os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
+    if "GROQ_API_KEY" not in os.environ and "GROQ_API_KEY" in st.secrets:
+        os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+
 
 def _parse_urls(raw: str) -> list[str]:
     urls: list[str] = []
@@ -60,6 +67,7 @@ def main():
     st.title(APP_TITLE)
     st.caption("Enter URLs to build a knowledge base, then ask your math question.")
 
+    _hydrate_env_from_streamlit_secrets()
     google_key = os.getenv("GOOGLE_API_KEY")
     groq_key = os.getenv("GROQ_API_KEY")
     if not google_key or not groq_key:
