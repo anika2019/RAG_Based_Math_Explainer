@@ -109,8 +109,8 @@ if __name__ == "__main__":
     # Suggested U.P. Board / NCERT Math Resources
     math_urls = [
         "https://ncert.nic.in/textbook.php?mhh1=1-15", # NCERT Class 10 Math (Hindi)
-        "https://www.teachoo.com/subjects/cbse-maths/class-10th/chapter-4-quadratic-equations/solutions/",
     ]
+        
 
     # Initialize
     emb, llm = initialize_math_rag()
