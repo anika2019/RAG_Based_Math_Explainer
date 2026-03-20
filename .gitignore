@@ -7,8 +7,7 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 
-# Local vector store artifacts (build on demand)
-resources/math_vector_store/
+# Local vector store artifacts (prebuilt for Streamlit Cloud)
 
 # Streamlit
 .streamlit/secrets.toml

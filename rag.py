@@ -51,7 +51,7 @@ def initialize_math_rag():
 
 def build_knowledge_base(urls, embeddings):
     """Scrapes UP Board/NCERT data and saves it locally."""
-    print("📚 Loading Math resources...")
+    print("Loading Math resources...")
     user_agent = os.getenv("USER_AGENT", DEFAULT_USER_AGENT)
     loader = WebBaseLoader(
         web_paths=urls,
@@ -69,7 +69,7 @@ def build_knowledge_base(urls, embeddings):
     
     vector_store = FAISS.from_documents(chunks, embeddings)
     vector_store.save_local(str(VECTOR_STORE_PATH))
-    print(f"✅ Knowledge base saved to {VECTOR_STORE_PATH}")
+    print(f"Knowledge base saved to {VECTOR_STORE_PATH}")
     return vector_store
 
 def get_math_help(vector_store, llm, student_query):
@@ -102,7 +102,7 @@ def get_math_help(vector_store, llm, student_query):
         | StrOutputParser()
     )
 
-    print(f"\n🤔 Thinking about: {student_query}")
+    print(f"\nThinking about: {student_query}")
     return rag_chain.invoke(student_query)
 
 if __name__ == "__main__":
@@ -123,5 +123,5 @@ if __name__ == "__main__":
     query = "द्विघात समीकरण (Quadratic Equation) को हल करने का सूत्र क्या है?"
     answer = get_math_help(v_store, llm, query)
     
-    print("\n--- 🎓 ASSISTANT RESPONSE ---")
+    print("\n--- ASSISTANT RESPONSE ---")
     print(answer)
